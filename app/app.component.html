@@ -1,0 +1,83 @@
+<h1>Hola. Este es mi tratamiento contra la depresión.</h1>
+<br>
+<table>
+    <app-mostrar-depre
+    [imagen]="imagen"></app-mostrar-depre>
+  <app-mostrar-depre
+    [imagen]="imagen2"></app-mostrar-depre>
+  <app-mostrar-depre
+    [imagen]="imagen3"></app-mostrar-depre>
+  <app-mostrar-depre
+    [imagen]="imagen4"></app-mostrar-depre>
+</table>
+
+
+<p>Casos de depresión: {{depreGuardada.length}}</p>
+
+
+<section>
+  <fieldset>
+    <label for="">Id imagen: </label>
+    <input
+      type="number"
+      name="id"
+      [value]="nuevoHistorial.id">
+    <p>{{ nuevoHistorial.id }}</p>
+  </fieldset>
+  <fieldset>
+    <label for="">Nombre imagen: </label>
+    <input
+      type="string"
+      name="nombre"
+      [value]="nuevoHistorial.nombre">
+    <p>{{ nuevoHistorial.nombre }}</p>
+  </fieldset>
+  <fieldset>
+    <label for="">Detalle de la imagen</label>
+    <textarea
+      name="detalle"
+      [value]="nuevoHistorial.detalle"
+      (input)="cambiarDetalle($event)"
+      cols="30"
+      rows="10"></textarea>
+    <p>{{ nuevoHistorial.detalle }} </p>
+  </fieldset>
+  <fieldset>
+    <label for="">URL de la imagen</label>
+    <input
+      type="url"
+      name="imagen"
+      [value]="nuevoHistorial.imagen"
+      (input)="cambiarImagen($event)">
+    <app-mostrar-depre
+      [imagen]="nuevoHistorial.imagen"></app-mostrar-depre>
+  </fieldset>
+  <fieldset>
+    <button
+      type="button"
+      role="button"
+      (click)="guardarHistorial()">
+      Guardar
+    </button>
+  </fieldset>
+</section>
+<section>
+  <article *ngFor="let item of depreGuardada">
+    <img [src]="item.imagen" height="150" width="150">
+
+    <h2 *ngIf="item.nombre; then aquiIf; else aquiElse"></h2>
+    <ng-template #aquiIf>
+      <h2>{{ item.nombre}}</h2>
+    </ng-template>
+    <ng-template #aquiElse>
+      <h2>Sin nombre</h2>
+    </ng-template>
+    <p *ngIf="item.detalle; then ifDetalle; else elseDetalle"></p>
+    <ng-template #ifDetalle>
+      <p> {{ item.detalle }} </p>
+    </ng-template>
+    <ng-template #elseDetalle>
+      <p>Sin detalle</p>
+    </ng-template>
+  </article>
+</section>
