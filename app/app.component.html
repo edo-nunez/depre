@@ -1,6 +1,9 @@
-<h1>Hola. Este es mi tratamiento contra la depresión.</h1>
+<h1>Hola. Estos son tipos de depresión.</h1>
 <h2>Ojalá que resulte</h2>
 <br>
+
+
+
 <table>
     <app-mostrar-depre
     [imagen]="imagen"></app-mostrar-depre>
@@ -30,7 +33,9 @@
     <input
       type="string"
       name="nombre"
-      [value]="nuevoHistorial.nombre">
+      [value]="nuevoHistorial.nombre"
+      (input)="cambiarNombre($event)">
+
     <p>{{ nuevoHistorial.nombre }}</p>
   </fieldset>
   <fieldset>
@@ -66,11 +71,11 @@
   <article *ngFor="let item of depreGuardada">
     <img [src]="item.imagen" height="150" width="150">
 
-    <h2 *ngIf="item.nombre; then aquiIf; else aquiElse"></h2>
-    <ng-template #aquiIf>
+    <h2 *ngIf="item.nombre; then ifNombre; else elseNombre"></h2>
+    <ng-template #ifNombre>
       <h2>{{ item.nombre}}</h2>
     </ng-template>
-    <ng-template #aquiElse>
+    <ng-template #elseNombre>
       <h2>Sin nombre</h2>
     </ng-template>
     <p *ngIf="item.detalle; then ifDetalle; else elseDetalle"></p>
@@ -82,3 +87,4 @@
     </ng-template>
   </article>
 </section>
+
